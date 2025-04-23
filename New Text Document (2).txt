@@ -1,0 +1,67 @@
+CREATE DATABASE LibraryDB
+USE LibraryDB
+
+CREATE TABLE Books
+(
+BookId INT IDENTITY PRIMARY KEY,
+Tittle NVARCHAR(25) NOT NULL,
+AuthorId INT,
+PublishedYear INT CHECK(PublishedYear>2000),
+FOREIGN KEY (AuthorId) REFERENCES Authors(AuthorId)
+)
+
+CREATE TABLE Authors
+(
+AuthorId INT PRIMARY KEY,
+Name NVARCHAR (25) NOT NULL
+)
+
+CREATE TABLE Genres
+(
+GenreId INT PRIMARY KEY,
+GenreName NVARCHAR(15) NOT NULL
+)
+
+CREATE TABLE BookGenres
+(
+BookId INT,
+GenreId INT,
+PRIMARY KEY (BookId, GenreId),
+FOREIGN KEY (BookId) REFERENCES Books(BookId),
+FOREIGN KEY (GenreId) REFERENCES Genres(GenreId)
+)
+SELECT * FROM AUTHORS
+INSERT INTO Authors 
+VALUES
+(1, 'Qaraqan'),
+(2,'SHukran'),
+(3,'Elxan'),
+(4,'Shekspir'),
+(5,'Agatha')
+
+INSERT INTO Books
+VALUES
+('Axsam caglari',5,2020),
+('Birinci addim',1,2010),
+('Ikinci addim',2,2012),
+('Qaranliq',3,2001),
+('Maraqli kitab', 4,2023),
+('Ingilis dili',2,2008)
+
+INSERT INTO Genres
+VALUES
+(1,'Drama'),
+(2,'Romantik'),
+(3,'Akustik'),
+(4,'Macera'),
+(5,'Qorxu')
+
+SELECT * FROM Books
+WHERE PublishedYear>2005
+ORDER BY Tittle ASC
+
+SELECT * FROM Books
+WHERE Tittle LIKE 'A%'
+
+SELECT * FROM Genres
+ORDER BY GenreName DESC
